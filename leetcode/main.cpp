@@ -15,7 +15,6 @@ using std::vector;
 int main(int argc, const char * argv[]) {
     // insert code here...
     Solution a;
-    vector<vector<int>> m = a.generate(5);
-    cout<<m[1][1];
-    return 0;
+    int m = 3^1;
+    cout<<m<<endl;
 }

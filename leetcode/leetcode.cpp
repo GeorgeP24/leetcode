@@ -464,5 +464,35 @@ vector<vector<int>> Solution::generate(int numRows)
             m[j][k] = m[j - 1][k - 1] + m[j - 1][k];
     return m;
 }
+//二逼方法 使用generate
+vector<int> Solution::getRow(int rowIndex) { 
+    vector<vector<int>> m = generate(rowIndex+1);
+    return m.back();
+}
+
+int Solution::kthGrammar(int N, int K) {
+    if (K==1)
+        return 0;
+    else if (K>pow(2, N-2))
+        return kthGrammar(N-1, K-pow(2, N-2))^1;
+    return kthGrammar(N-1, K);
+}
+
+vector<TreeNode *> Solution::generateTrees(int n) { 
+    <#code#>;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
