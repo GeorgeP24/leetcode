@@ -48,7 +48,15 @@ public:
     // 杨辉三角2
     vector<int> getRow(int rowIndex);
     int kthGrammar(int N, int K);
+//    Catalan数的定义令h(1)=1，Catalan数满足递归式：h(n) = h(1)*h(n-1) + h(2)*h(n-2) + ... + h(n-1)h(1)，n>=2该递推关系的解为：h(n) = C(2n-2,n-1)/n，n=1,2,3,...（其中C(2n-2,n-1)表示2n-2个中取n-1个的组合数）
+//    不同的二叉搜索树个数2
     vector<TreeNode*> generateTrees(int n);
+    vector<TreeNode*> *generateTreesDFS(int start,int end);
+    ListNode* swapPairs(ListNode* head);
+    //寻找数组的中心索引
+    int pivotIndex(vector<int>& nums);
+    void buffer(vector<int> &nums,int &begin,int &end,int &temp);
+    
     
 };
 #endif /* leetcode_hpp */

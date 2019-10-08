@@ -15,6 +15,13 @@ using std::vector;
 int main(int argc, const char * argv[]) {
     // insert code here...
     Solution a;
-    int m = 3^1;
-    cout<<m<<endl;
+    vector<int> e{1,7,3,6,5,6};
+    vector<int> x3{-1,-1,-1,-1,-1,0};
+    vector<int> x4{-1,-1,-1,-1,0,1};
+    
+    cout<<a.pivotIndex(e)<<endl;
+    cout<<a.pivotIndex(x3)<<endl;
+    cout<<a.pivotIndex(x4)<<endl;
+//    cout<<a.pivotIndex(x)<<endl;
+//    cout<<a.pivotIndex(x2)<<endl;
 }

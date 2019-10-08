@@ -7,11 +7,15 @@
 //
 
 #include "leetcode.hpp"
+#include "datasturct.hpp"
+
 #include <vector>
 #include <math.h>
 #include <stack>
 #include <queue>
 #include <string>
+#include<numeric>
+
 int uniquePath(int m, int n) {
         if(m == 0 || n==0)
             return 0;
@@ -478,9 +482,57 @@ int Solution::kthGrammar(int N, int K) {
     return kthGrammar(N-1, K);
 }
 
-vector<TreeNode *> Solution::generateTrees(int n) { 
-    <#code#>;
+vector<TreeNode*> Solution::generateTrees(int n) {
+    if(n<1) return {};
+        return *generateTreesDFS(1,n);
 }
+
+vector<TreeNode*> *Solution::generateTreesDFS(int start,int end){
+    vector<TreeNode*> *trees=new vector<TreeNode*>();
+        if(start>end){
+            trees->push_back(nullptr);
+            return trees;
+        }
+        for (int i = start; i <= end; i++){
+            vector<TreeNode*> *left_trees = generateTreesDFS(start, i-1);
+            vector<TreeNode*> *right_trees = generateTreesDFS(i+1, end);
+            for(int j = 0;j<left_trees->size();j++){
+                for (int k = 0; k<right_trees->size(); k++) {
+                    TreeNode *current_tree = new TreeNode(i);
+                    current_tree->left = (*left_trees)[j];
+                    current_tree->right = (*right_trees)[k];
+                    trees->push_back(current_tree);
+                }}}
+        return trees;
+}
+
+ListNode *Solution::swapPairs(ListNode *head) {
+if(head==nullptr||head->next==nullptr) return head;
+    ListNode *temp = head->next;
+    head->next = swapPairs(temp->next);
+    temp->next = head;
+    return temp;
+}
+
+int Solution::pivotIndex(vector<int> &nums) {
+    if(nums.size()==0)
+        return -1;
+    int begin = 0;
+    int end = accumulate(nums.begin(), nums.end(), 0)-nums[0];
+    if(begin==end)
+        return 0;
+    for(int i = 1;i<nums.size();i++){
+        begin += nums[i-1];
+        end -= nums[i];
+        if (begin ==end) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
+
 
 
 
