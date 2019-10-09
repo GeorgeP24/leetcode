@@ -15,6 +15,7 @@
 #include <queue>
 #include <string>
 #include<numeric>
+#include <algorithm>
 
 int uniquePath(int m, int n) {
         if(m == 0 || n==0)
@@ -518,7 +519,7 @@ int Solution::pivotIndex(vector<int> &nums) {
     if(nums.size()==0)
         return -1;
     int begin = 0;
-    int end = accumulate(nums.begin(), nums.end(), 0)-nums[0];
+    int end = accumulate(nums.begin(), nums.end(), 0)-nums[0]; //<numeric>
     if(begin==end)
         return 0;
     for(int i = 1;i<nums.size();i++){
@@ -530,6 +531,111 @@ int Solution::pivotIndex(vector<int> &nums) {
     }
     return -1;
 }
+
+int Solution::duplicate(vector<int> nums) { 
+    if (nums.size()<=1) {
+        return -1;
+    }
+    for (int i = 0; i<nums.size(); i++) {
+        while (nums[i] != i) {
+            if (nums[nums[i]] == nums[i])
+            return nums[i];
+            else{
+                nums[i] = nums[i] + nums[nums[i]];
+                nums[nums[i]] = nums[i] - nums[nums[i]];
+                nums[i] = nums[i] - nums[nums[i]];
+            }
+        }
+    }
+    return -1;
+}
+
+int Solution::cDuplicate(const vector<int>& nums) {
+    if (nums.size()<2) {
+        return -1;
+    }
+    int begin = 0;
+    int end = nums.size()-1;
+    while (end>=begin) {
+        int mid = ((end - begin )>>1) + begin;
+        int count = aid_cDuplicate(nums, begin, mid);
+        if (begin == end){
+            if (count>1)
+                return begin;
+            break;
+        }
+        if (count>(mid-begin+1))
+            end = mid;
+        else
+            begin = mid+1;
+    }
+    return -1;
+}
+int Solution::aid_cDuplicate(const vector<int> &nums,int begin,int end) {
+    if (nums.size()==0) {
+        return 0;
+    }
+    int count = 0;
+    for (int i = 0; i<nums.size(); i++) {
+        if (nums[i]>=begin && nums[i]<=end)
+            count++;
+    };
+    return count;
+}
+
+bool Solution::searchNumber(vector<vector<int>> nums, int k) {
+    auto res = false;
+    while(nums.size()!=0) {
+        if (k == nums[0].back()) {
+            return true;
+        }
+        else if(k>nums[0].back()){
+            nums.erase(nums.begin());
+        }
+        else if(k<nums[0].back()){
+            for(auto &temp:nums){
+                temp.pop_back();
+            }
+        }
+    }
+    return res;
+}
+
+vector<int> Solution::findDiagonalOrder(vector<vector<int> > &matrix) {
+    vector<int> res;
+    vector<vector<int>> temp;
+    int i = 1;
+    for(auto x:matrix){
+        if(i%2==0){
+        for(auto &n: temp){
+            res.push_back(*(n.begin()));
+            n.erase(n.begin());
+            if(n.begin()==n.end())
+                temp.erase(temp.begin());
+        }
+        res.push_back(*(x.begin()));
+        x.erase(x.begin());
+        temp.push_back(x);
+        i++;
+        }
+        else{
+        res.push_back(*(x.begin()));
+            x.erase(x.begin());
+            temp.push_back(x);
+        for(auto &n: temp){
+            res.push_back(*(n.end()));
+            n.erase(n.end());
+            if(n.begin()==n.end())
+                temp.erase(temp.begin());
+        }
+            i++;
+        }
+    }
+    return res;
+}
+
+
+
 
 
 

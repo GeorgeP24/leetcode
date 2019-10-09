@@ -55,7 +55,15 @@ public:
     ListNode* swapPairs(ListNode* head);
     //寻找数组的中心索引
     int pivotIndex(vector<int>& nums);
-    void buffer(vector<int> &nums,int &begin,int &end,int &temp);
+    //数组中重复数字 size = n, -1<nums[i]<n
+    int duplicate(vector<int> nums);
+    //不修改数组 寻找重复数字 size = n+1 0<nums[i]<n+1
+    int cDuplicate(const vector<int> &nums);
+    int aid_cDuplicate(const vector<int> &nums,int,int);
+    //二维数组查找
+    bool searchNumber(vector<vector<int>> nums,int k);
+    //对角线遍历
+    vector<int> findDiagonalOrder(vector<vector<int>>& matrix);
     
     
 };

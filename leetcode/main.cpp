@@ -9,19 +9,20 @@
 #include <iostream>
 #include "datasturct.hpp"
 #include "leetcode.hpp"
+#include <stack>
 using std::cout;
 using std::endl;
 using std::vector;
 int main(int argc, const char * argv[]) {
     // insert code here...
     Solution a;
-    vector<int> e{1,7,3,6,5,6};
+    vector<int> e{1,0,1,3,3,5,6,4,3};
     vector<int> x3{-1,-1,-1,-1,-1,0};
     vector<int> x4{-1,-1,-1,-1,0,1};
-    
-    cout<<a.pivotIndex(e)<<endl;
-    cout<<a.pivotIndex(x3)<<endl;
-    cout<<a.pivotIndex(x4)<<endl;
-//    cout<<a.pivotIndex(x)<<endl;
-//    cout<<a.pivotIndex(x2)<<endl;
+    vector<vector<int>> m{{1,2,8,9},{2,4,9,12},{4,7,10,13},{6,8,11,15}};
+    vector<vector<int>> m2 = {{1,2,3},{4,5,6},{7,8,9}};
+    if(1%2==0)
+        cout<<0<<endl;
+    cout<<1<<endl;
+//    a.findDiagonalOrder(m2);
 }
