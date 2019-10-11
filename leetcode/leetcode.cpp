@@ -602,37 +602,109 @@ bool Solution::searchNumber(vector<vector<int>> nums, int k) {
 }
 
 vector<int> Solution::findDiagonalOrder(vector<vector<int> > &matrix) {
+    if(matrix.size()==0)
+        return {};
     vector<int> res;
     vector<vector<int>> temp;
     int i = 1;
     for(auto x:matrix){
         if(i%2==0){
         for(auto &n: temp){
+            if(n.size()!=0){
             res.push_back(*(n.begin()));
             n.erase(n.begin());
-            if(n.begin()==n.end())
-                temp.erase(temp.begin());
+            }
         }
         res.push_back(*(x.begin()));
         x.erase(x.begin());
+        if(x.size()>0)
         temp.push_back(x);
         i++;
         }
-        else{
+        else {
         res.push_back(*(x.begin()));
             x.erase(x.begin());
+            int len = temp.size()-1;
+            for(int j = len;j>=0;j--){
+                if(temp[j].size()!=0){
+            res.push_back(*(temp[j].begin()));
+            temp[j].erase(temp[j].begin());
+            }}
+            if(x.size()>0)
             temp.push_back(x);
-        for(auto &n: temp){
-            res.push_back(*(n.end()));
-            n.erase(n.end());
-            if(n.begin()==n.end())
-                temp.erase(temp.begin());
-        }
             i++;
         }
     }
+    int const_len = temp.size();
+    while (res.size()!=matrix.size()*matrix.back().size()) {
+    if(i%2==0){
+        for(int k = 0;k<const_len;k++){
+            if(temp[k].size()!=0){
+        res.push_back(*(temp[k].begin()));
+        temp[k].erase(temp[k].begin());
+            }
+        }
+    }
+    else{
+    for(int j = const_len-1;j>=0;j--){
+        if(temp[j].size()!=0){
+        res.push_back(*(temp[j].begin()));
+        temp[j].erase(temp[j].begin());
+        }
+    }
+    }
+    i++;
+    }
     return res;
 }
+
+void Solution::replaceChar(std::string &str,char ch) {
+    if (str.size()==0) {
+        return;
+    }
+    for(int i = 0;i<str.size();i++){
+        if(str[i]==ch){
+            str.erase(i,1);
+            str.insert(i, "%20");
+        }
+    }
+}
+
+vector<int> Solution::spiralOrder(vector<vector<int> > &matrix) { 
+    vector<int> res;
+    if (matrix.size()==0) {
+        return {};
+    }
+    while(matrix.size()!=0){
+    for(auto val : matrix[0]){
+        res.push_back(val);
+    }
+    matrix.erase(matrix.begin());
+    for(auto &arr:matrix){
+        if(arr.size()==0)
+            break;
+        res.push_back(arr.back());
+        arr.erase(arr.end()-1);
+    }
+    if(matrix.size()==0)
+        break;
+    for(int i = matrix.back().size()-1;i>-1;i--){
+        res.push_back(matrix.back()[i]);
+    }
+    matrix.erase(matrix.end()-1);
+    
+    for (int j = matrix.size()-1; j>-1; j--) {
+        if(matrix[j].size()==0)
+            break;
+        res.push_back(matrix[j][0]);
+        matrix[j].erase(matrix[j].begin());
+    }
+    }
+    return res;
+}
+
+
+   
 
 
 
