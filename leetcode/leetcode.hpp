@@ -69,6 +69,10 @@ public:
     void replaceChar(string &str,char ch);
     //给定一个包含 m x n 个元素的矩阵（m 行, n 列），请按照顺时针螺旋顺序，返回矩阵中的所有元素。
     vector<int> spiralOrder(vector<vector<int>>& matrix);
+    // 二进制求和
+    string addBinary(string a, string b);
+    //寻找子串
+    int strStr(string haystack, string needle);
     
 };
 #endif /* leetcode_hpp */

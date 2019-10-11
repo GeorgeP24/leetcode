@@ -16,13 +16,8 @@ using std::vector;
 int main(int argc, const char * argv[]) {
     // insert code here...
     Solution a;
-    vector<vector<int>> m{{1,2,8,9},{4,7,10,13},{6,8,11,15}};
-    vector<vector<int>> m2 = {{1,2,3},{4,5,6},{7,8,9}};
-    vector<vector<int>> m3 = {{3},{2},{1},{1},{3},{2},{1},{1},{3},{2},{1},{1}};
-
-            
-    a.spiralOrder(m3);
-    
-
+    string x1 = "mississippi";
+    string x2 = "issip";
+    cout<<a.strStr(x1, x2)<<endl;
 }
     

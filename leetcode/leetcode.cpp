@@ -703,6 +703,126 @@ vector<int> Solution::spiralOrder(vector<vector<int> > &matrix) {
     return res;
 }
 
+std::string Solution::addBinary(std::string a, std::string b) { 
+    if(a.size()==0&&b.size()==0)
+        return "";
+    if(a.size()==0&&b.size()!=0)
+        return b;
+    if(a.size()==0&&b.size()!=0)
+        return a;
+    string res = "";
+    int temp = 0;
+    int count = 0;
+    while (a.size()!=0&&b.size()!=0) {
+        temp = a.back()+b.back();
+        if(count == 0){
+        if(temp == 98)
+        {
+            res.push_back('0');
+            count = 1;
+        }
+        else if(temp == 97) res.push_back('1');
+        else if(temp == 96) res.push_back('0');
+        }
+        else{
+            if(temp == 98) res.push_back('1');
+            else if(temp == 97) res.push_back('0');
+            else if(temp == 96){
+                res.push_back('1');
+                count = 0;
+            }
+        }
+        a.pop_back();
+        b.pop_back();
+    }
+    string r_res(res.rbegin(),res.rend());
+    if(count == 0){
+    if (a.size()!=0)
+        return a.append(r_res);
+    if (b.size()!=0)
+        return b.append(r_res);
+    }
+    else{
+        if(a.size()!=0) {
+            for (int i = a.size() - 1; i>0; i--) {
+                if (a[i] == '1') {
+                    a[i] = '0';
+                }
+                else{
+                    a[i] ='1';
+                    count = 0;
+                    break;
+                }
+            }
+            if(a[0]=='1'&& count ==1){
+                a[0] = '0';
+                a.insert(a.begin(), '1');
+            }
+            return a.append(r_res);
+    }
+        if(b.size()!=0){
+            for (int i = b.size()-1; i>0; i--) {
+                if(b[i]=='1') b[i] = '0';
+                else {
+                    b[i] = '1';
+                    count = 0;
+                    break;
+                }
+            }
+            if(b[0] == '1' && count == 1){
+                b[0] = '0';
+                b.insert(b.begin(), '1');
+            }
+            return b.append(r_res);
+        }
+        r_res.insert(r_res.begin(), '1');
+    }
+    return r_res;
+}
+
+int Solution::strStr(std::string haystack, std::string needle) { 
+    if(needle.size()==0)
+        return 0;
+    if(haystack.size()==0&&needle.size()!=0)
+        return -1;
+    int k = haystack.size()-needle.size();
+    if(k<0)
+        return -1;
+    int i = 0;
+    int j = 0;
+    int res = -1;
+    int m = 0;
+    while (k>-1) {
+        for(;m<haystack.size();){
+            if(haystack[m]!= needle[i]){
+                if(i==0){
+                    j++;
+                    k--;
+                    res = 0;
+                    m = j;
+                    break;
+                }
+                i = 0;
+                res = 0;
+                m = j;
+                break;
+            }
+            else {
+                if(i==0)
+                    res = m;
+                i++;
+                m++;
+            }
+            if(i==needle.size())
+                return res;
+            k--;
+        }
+}
+    return res;
+}
+
+
+
 
    
 
