@@ -780,46 +780,183 @@ std::string Solution::addBinary(std::string a, std::string b) {
     return r_res;
 }
 
-int Solution::strStr(std::string haystack, std::string needle) { 
+int Solution::strStr(std::string haystack, std::string needle) {
     if(needle.size()==0)
         return 0;
-    if(haystack.size()==0&&needle.size()!=0)
-        return -1;
-    int k = haystack.size()-needle.size();
-    if(k<0)
-        return -1;
+    vector<int> next = getNext(needle);
     int i = 0;
     int j = 0;
-    int res = -1;
-    int m = 0;
-    while (k>-1) {
-        for(;m<haystack.size();){
-            if(haystack[m]!= needle[i]){
-                if(i==0){
-                    j++;
-                    k--;
-                    res = 0;
-                    m = j;
-                    break;
-                }
-                i = 0;
-                res = 0;
-                m = j;
-                break;
-            }
-            else {
-                if(i==0)
-                    res = m;
-                i++;
-                m++;
-            }
-            if(i==needle.size())
-                return res;
-            k--;
+    int h_len = haystack.size();
+    int n_len = needle.size();
+    while (i<h_len&&j<n_len) {
+        if (j==-1||haystack[i]==needle[j]) {
+            i++;
+            j++;
         }
+        else{
+            j = next[j];
+        }
+        if(j==n_len)
+            return i-j;
+    }
+    return -1;
 }
+
+vector<int> Solution::getNext(std::string a) {
+    vector<int> next(a.size());
+    int a_len = a.size();
+    int i = 0;
+    int j = -1;
+    next[0] = -1;
+    while (i<a_len-1) {
+        if(j==-1||a[i]==a[j]){
+            i++;
+            j++;
+            if(a[i]!=a[j])
+                next[i] = j;
+            else next[i] = next[j];
+        }
+        else j = next[j];
+    }
+    return next;
+}
+
+int Solution::arrayPairSum(vector<int> &nums) {
+    if(nums.size()<1)
+        return 0;
+    std::sort(nums.begin(),nums.end());
+    int res = 0;
+    for(int i = 0;i<nums.size();i++){
+        if(i%2==0)
+            res += nums[i];
+    }
     return res;
 }
+
+int Solution::findMaxConsecutiveOnes(vector<int> &nums) {
+    int count = 0;
+    int max = 0;
+    for (int i = 0; i < nums.size(); ++i) {
+        if(nums[i]==1)
+            count++;
+        else if(count>max) {
+            max = count;
+            count = 0;
+        }
+        else count = 0;
+    }
+    if(count>max)
+        count = max;
+    return max;
+}
+
+string Solution::reverseWords(string s) {
+    if (s.size() < 2) {
+        if(s.size()==1 && s[0] != ' ')
+            return s;
+        else
+            return "";
+    }
+    string res = "";
+    string::iterator ch;
+    ch = s.begin();
+    stack<string> stc;
+    string m = "";
+    while(ch!=s.end()){
+        if(*ch != ' ') {
+            m.push_back(*ch);
+            ch++;
+        }
+        else if(m.size()!=0){
+            stc.push(m);
+            stc.push(" ");
+            m = "";
+            ch++;
+        }
+        else
+            ch++;
+    }
+    if(m.size()!=0)
+        stc.push(m);
+    if(stc.size()==0)
+        return " ";
+    if(stc.top()==" ")
+        stc.pop();
+    while(stc.size()!=0){
+        res += stc.top();
+        stc.pop();
+    }
+    return res;
+}
+
+string Solution::reverseWords2(string s) {
+    if(s.size()<2)
+        return s;
+    vector<string> temp;
+    string res;
+    string str= "";
+    for(auto _s:s){
+        if(_s!=' '){
+            str.push_back(_s);
+        }
+        else if(str.size()!=0) {
+            temp.push_back(str);
+            str = "";
+        }
+    }
+    if(str.size()!=0)
+        temp.push_back(str);
+    if(temp.size() == 0)
+        return "";
+    for(auto t: temp){
+        reverse(t.begin(),t.end());
+        res += t;
+        res += " ";
+    }
+    if(res[res.size()-1]== ' ')
+        res.pop_back();
+    return res;
+}
+
+string Solution::reverseWords2_2(string s) {
+    if(s.size()<2)
+        return s;
+    int i = 0;
+    int j = 0;
+    int temp = 0;
+    char t = ' ';
+    int len = s.size();
+    for(;i<len;){
+        while (j<len&&s[cdj]!=' ')
+            j++;
+        int temp = j+1;
+        j = j-1;
+        while(i<j){
+            s[i] = s[i] + s[j];
+            s[j] = s[i] - s[j];
+            s[i] = s[i] - s[j];
+            i++;
+            j--;
+        }
+        i = temp;
+        j = temp;
+    }
+    string m(s);
+    return m;
+}
+
+//std::string Solution::longestCommonPrefix(vector<std::string> &strs) { 
+//    string res ="";
+//    for (int i = 0; i<strs.size(); i++) {
+//        char temp = strs[i][0];
+//        for(auto x:strs){
+//            x[i]
+//        }
+//    }
+//    return res;
+//}
+
+
 
 
 

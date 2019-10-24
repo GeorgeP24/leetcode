@@ -9,7 +9,7 @@
 #ifndef leetcode_hpp
 #define leetcode_hpp
 
-#include <stdio.h>
+#include <cstdio>
 #include <vector>
 #include "datasturct.hpp"
 
@@ -71,8 +71,23 @@ public:
     vector<int> spiralOrder(vector<vector<int>>& matrix);
     // 二进制求和
     string addBinary(string a, string b);
-    //寻找子串
+    //寻找子串 //KMP
     int strStr(string haystack, string needle);
-    
+    //next 数组 优化版
+    vector<int> getNext(string a);
+    // 编写一个函数来查找字符串数组中的最长公共前缀。
+    //    如果不存在公共前缀，返回空字符串 ""
+    string longestCommonPrefix(vector<string>& strs);
+    // 给定长度为 2n 的数组, 你的任务是将这些数分成 n 对, 例如 (a1, b1), (a2, b2), ..., (an, bn) ，使得从1 到 n 的 min(ai, bi) 总和最大。
+    int arrayPairSum(vector<int>& nums);
+    //给定一个二进制数组， 计算其中最大连续1的个数。
+    int findMaxConsecutiveOnes(vector<int>& nums);
+    //翻转字符串里的单词
+    string reverseWords(string s);
+//    给定一个字符串，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。
+//    注意：在字符串中，每个单词由单个空格分隔，并且字符串中不会有任何额外的空格。
+    string reverseWords2(string s);
+    //第二版本
+    string reverseWords2_2(string s);
 };
 #endif /* leetcode_hpp */
