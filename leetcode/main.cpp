@@ -53,13 +53,37 @@
 
 
 int main() {
-    auto *a = new Solution();
-    vector<int> nums{1,0,1,1,0,1};
-    string s = "1 24432 fds abc cba";
-    string s2 = "Let's take LeetCode contest";
-    string s1 = " ";
-    cout<<a->reverseWords2_2(s2)<<endl;
-    delete a;
+    Solution a;
+    listNode<int>* p1 = new listNode<int>(1);
+    listNode<int>* p2 = new listNode<int>(2);
+    listNode<int>* p3 = new listNode<int>(23);
+    listNode<int>* p4 = new listNode<int>(2);
+    listNode<int>* p5 = new listNode<int>(21);
+    listNode<int>* p6 = new listNode<int>(2);
+    listNode<int>* p7 =new listNode<int>(25);
+    listNode<int>* p8 = new listNode<int>(2);
+    p1->m_next = p2;
+    p2->m_next = p3;
+    p3->m_next = p4;
+    p4->m_next = p5;
+    p5->m_next = p6;
+    p6->m_next = p7;
+    p7->m_next = p8;
+    p8->m_next = nullptr;
+
+    listNode<int>* print = a.sortList(p1);
+    while (print){
+        cout<<print->m_value<<endl;
+        print = print->m_next;
+    }
+    delete p1;
+    delete p2;
+    delete p3;
+    delete p4;
+    delete p5;
+    delete p6;
+    delete p7;
+    delete p8;
     return 0;
 }
     
