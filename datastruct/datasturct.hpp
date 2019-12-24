@@ -1,6 +1,6 @@
 //
 //  datasturct.hpp
-//  leetcode
+//  interviewer
 //
 //  Created by 郭毅 on 2018/10/6.
 //  Copyright © 2019 郭毅. All rights reserved.
@@ -172,9 +172,29 @@ template <class T>
 template <class T>
     class biSearchTree{
     public:
-        void insertValue(biTreeNode<T> *head,const T& value);
+        void insertValue(biTreeNode<T> *head,const T& value) {
+            if(!head)
+                return;
+            biTreeNode<T> *work = head;
+            while(work){
+                if(work->m_value>value) {
+                    if(work->m_left== nullptr){
+                        biTreeNode<T> *res = new biTreeNode<T>(value);
+                        work->m_left = res;
+                        return;
+                    }
+                    work = work->m_left;
+                }
+                else{
+                    if(work->m_right == nullptr){
+                        biTreeNode<T> *res = new biTreeNode<T>(value);
+                        work->m_right = res;
+                        return;
+                    }
+                    work = work->m_right;
+                }}
+        }
         void deleteValue(biTreeNode<T> *head,const T&value);
-        void insertValue(biTreeNode <T> *head, T value);
     };
 
     template<class T>

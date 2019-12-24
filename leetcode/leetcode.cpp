@@ -1,15 +1,12 @@
-#include "datasturct.hpp"
 //
-//  leetcode.cpp
-//  leetcode
+//  interviewer.cpp
+//  interviewer
 //
 //  Created by 郭毅 on 2018/10/6.
 //  Copyright © 2019 郭毅. All rights reserved.
 //
 
 #include "leetcode.hpp"
-#include "datasturct.hpp"
-
 
 #include<iostream>
 #include <math.h>
@@ -1177,22 +1174,7 @@ bool Solution::isPalindrome(int x) {
     return false;
 }
 
-int Solution::majorityElement(vector<int> &nums) {
-    sort(nums.begin(),nums.end());
-    int len = nums.size();
-    int count = 0;
-    int i = 0;
-    for(auto n:nums){
-        if(n!=i) {
-            i = n;
-            count = 0;
-        }
-        count++;
-        if(count>len/2)
-            return i;
-    }
-    return -1;
-}
+
 
 
 
@@ -1214,6 +1196,162 @@ int Solution::findKth(vector<int>& nums1, int i, vector<int>& nums2, int j, int 
         return findKth(nums1, i, nums2, j + k / 2, k - k / 2);
     }
 }
+
+int Solution::majorityElement(vector<int> &nums) {
+    sort(nums.begin(),nums.end());
+    int len = nums.size();
+    int count = 0;
+    int i = 0;
+    for(auto n:nums){
+        if(n!=i) {
+            i = n;
+            count = 0;
+        }
+        count++;
+        if(count>len/2)
+            return i;
+    }
+    return -1;
+}
+
+int Solution::majorityElement_1(vector<int> &nums) {
+    sort(nums.begin(),nums.end());
+    int len = nums.size();
+    return nums[len/2];
+}
+
+int Solution::timesInSortArr(vector<int> &nums,int n) {
+    int len = nums.size()-1;
+    if (nums.size()<0)
+        return -1;
+    int frist = findFristN(nums,0,len,n);
+    int last = findLastN(nums,0,len,n);
+    return last-frist+1;
+}
+
+int Solution::findFristN(vector<int> &nums, int start, int end, int n) {
+    if(end<0)
+        return -1;
+    int mid = end/2;
+    if(nums[mid] == n)
+    {
+        if((mid>0&&nums[mid-1]!=n)||mid == 0)
+            return mid;
+        else
+            end = mid-1;
+    }
+    else if(nums[mid]>n)
+        end = mid-1;
+    else
+        start = mid+1;
+    return findFristN(nums,start,end,n);
+}
+
+int Solution::findLastN(vector<int> &nums, int start, int end, int n) {
+    if(end<0)
+        return -1;
+    int mid = end/2;
+    int len = end - start + 1;
+    if(nums[mid] == n)
+    {
+        if ((mid<len-1&&nums[mid+1]!=n)||mid==len-1){
+            return mid;
+        }
+        else{
+            start = mid +1;
+        }
+    }
+    else if(nums[mid]>n)
+        end = mid-1;
+    else
+        start = mid+1;
+    return findLastN(nums,start,end,n);
+
+}
+
+int Solution::numSquares(int n) {
+    while(n%4==0)
+        n/=4;
+    while(n%8==7)
+        return 4;
+    for(int i = 0;i*i<n;i++){
+        int j = sqrt(n-i*i);
+        if(j*j+i*i==n)
+            return !!i+!!j;
+    }
+    return 3;
+}
+
+int Solution::findTargetSumWays(vector<int> &nums, int S) {
+    int res = 0;
+    helper(nums,S,0,res);
+    return res;
+}
+
+void Solution::helper(vector<int>& nums,int S,int start, int &res){
+    if(start>=nums.size()){
+        if(S==0)
+        ++res;
+        return;
+    }
+    helper(nums,S-nums[start],start+1,res);
+    helper(nums,S+nums[start],start+1,res);
+}
+
+string Solution::decodeString(string s) {
+    int len = s.size();
+    int num = 0;
+    stack<int> n_stack;
+    stack<string> s_stack;
+    string res;
+    for(auto n:s){
+        if(isalpha(n)){
+            res.push_back(n);
+        }
+        else if(isdigit(n)){
+            num = num*10+n-'0';
+        }
+        else if(n =='['){
+            s_stack.push(res);
+            res = "";
+            n_stack.push(num);
+            num = 0;
+        }
+        else{
+            for(int j = 0;j<n_stack.top();j++){
+                s_stack.top() += res;
+            }
+            n_stack.pop();
+            res = s_stack.top();
+            s_stack.pop();
+        }
+    }
+    return res;
+}
+
+int Solution::add(int num1, int num2) {
+    int sum;
+    int carry;
+    do{
+        sum = num1^num2;
+        carry = (num1&num2)<<1;
+        num1 = sum;
+        num2 = carry;
+    }
+    while (num2!=0);
+    return num1;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

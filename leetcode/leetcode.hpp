@@ -1,6 +1,6 @@
 //
-//  leetcode.hpp
-//  leetcode
+//  interviewer.hpp
+//  interviewer
 //
 //  Created by 郭毅 on 2018/10/6.
 //  Copyright © 2019 郭毅. All rights reserved.
@@ -11,7 +11,7 @@
 
 #include <cstdio>
 #include <vector>
-#include "datasturct.hpp"
+#include "../datastruct/datasturct.hpp"
 using namespace _datasturct;
 using std::vector;
 class Solution{
@@ -60,7 +60,7 @@ public:
     int duplicate(vector<int> nums);
     //不修改数组 寻找重复数字 size = n+1 0<nums[i]<n+1
     int cDuplicate(const vector<int> &nums);
-    int aid_cDuplicate(const vector<int> &nums,int,int);
+    int aid_cDuplicate(const vector<int> &nums,int,int );
     //二维数组查找
     bool searchNumber(vector<vector<int>> nums,int k);
     //对角线遍历
@@ -127,6 +127,47 @@ public:
     bool isPalindrome(int x);
     //众数 个数大于等于n/2
     int majorityElement(vector<int>& nums);
+    //排序后 中位数为该数
+    int majorityElement_1(vector<int>& nums);
+    //排序数组中，N的次数 O(logN)
+    int timesInSortArr(vector<int>& nums,int n);
+    int findFristN(vector<int>& nums,int start,int end,int n);
+    int findLastN(vector<int>& nums,int start,int end,int n);
+    //满足四数平方和定理的数n（这里要满足由四个数构成，小于四个不行），必定满足 n=4^a(8b+7)
+    //Lagrange 四平方定理： 任何一个正整数都可以表示成不超过四个整数的平方之和。
+    int numSquares(int n);
+    //给定一个非负整数数组，a1, a2, ..., an, 和一个目标数，S。现在你有两个符号 + 和 -。对于数组中的任意一个整数，你都可以从 + 或 -中选择一个符号添加在前面。
+    //返回可以使最终数组和为目标数 S 的所有添加符号的方法数。
+    //数组非空，且长度不会超过20。
+    //初始的数组的和不会超过1000。
+    //保证返回的最终结果能被32位整数存下。
+    int findTargetSumWays(vector<int>& nums, int S);
+    void helper(vector<int>& nums,int S,int start, int &res);
+    //编码规则为: k[encoded_string]，表示其中方括号内部的 encoded_string 正好重复 k 次。注意 k 保证为正整数。
+    //
+    //你可以认为输入字符串总是有效的；输入字符串中没有额外的空格，且输入的方括号总是符合格式要求的。
+    //
+    //此外，你可以认为原始数据不包含数字，所有的数字只表示重复的次数 k ，例如不会出现像 3a 或 2[4] 的输入
+    string decodeString(string s);
+    //计算1+...+n 不使用乘法，for，while等逻辑运算。1.构造函数。2.虚函数。
+//    unsigned int addN(int n);
+//    class add{
+//    public:
+//        add(){++i;n+=i;};
+//        static unsigned int get(){return n;}
+//        static void reset(){n = 0; i = 0;}
+//    private:
+//        static unsigned int n;
+//        static unsigned int i;
+//    };
+//    unsigned int addFinal(unsigned int n){
+//        add::reset();
+//        add *a = new add[n];
+//        delete []a;
+//        a = nullptr;
+//        return add::get();
+//    }
+ int add(int num1,int num2);
 };
 
 

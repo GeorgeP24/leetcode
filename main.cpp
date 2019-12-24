@@ -1,15 +1,14 @@
 //
 //  main.cpp
-//  leetcode
+//  interviewer
 //
 //  Created by 郭毅 on 2018/10/6.
 //  Copyright © 2019 郭毅. All rights reserved.
 //
 
 #include <iostream>
-#include "datasturct.hpp"
-#include "leetcode.hpp"
-#include <stack>
+#include "datastruct/datasturct.hpp"
+#include "leetcode/leetcode.hpp"
 
 //class example{
 //private:
@@ -51,39 +50,21 @@
 //    return p;
 //}
 
+class test{
+public:
+    test(){
+        cout<<"cstr"<<endl;
+    }
+    test(const test&){
+        cout<<"copy cstr"<<endl;
+    }
+private:
+    int a;
+    int b;
+};
 
 int main() {
     Solution a;
-    listNode<int>* p1 = new listNode<int>(1);
-    listNode<int>* p2 = new listNode<int>(2);
-    listNode<int>* p3 = new listNode<int>(23);
-    listNode<int>* p4 = new listNode<int>(2);
-    listNode<int>* p5 = new listNode<int>(21);
-    listNode<int>* p6 = new listNode<int>(2);
-    listNode<int>* p7 =new listNode<int>(25);
-    listNode<int>* p8 = new listNode<int>(2);
-    p1->m_next = p2;
-    p2->m_next = p3;
-    p3->m_next = p4;
-    p4->m_next = p5;
-    p5->m_next = p6;
-    p6->m_next = p7;
-    p7->m_next = p8;
-    p8->m_next = nullptr;
-
-    listNode<int>* print = a.sortList(p1);
-    while (print){
-        cout<<print->m_value<<endl;
-        print = print->m_next;
-    }
-    delete p1;
-    delete p2;
-    delete p3;
-    delete p4;
-    delete p5;
-    delete p6;
-    delete p7;
-    delete p8;
     return 0;
 }
     
