@@ -14,4 +14,4 @@ add_subdirectory(datastruct)
 
 #add_library(lib ${DIR_SRCS})
 ADD_EXECUTABLE(interview main.cpp)
-target_link_libraries(interview offer leetcode)
+target_link_libraries(interview offer leetcode datastruct)

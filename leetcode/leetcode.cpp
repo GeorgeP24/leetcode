@@ -39,54 +39,54 @@ int uniquePaths(int m, int n){
         return uniquePaths(m,n);
     }
     
-listNode<int> *Solution::addTwoNumbers(listNode<int>* l1, listNode<int>*l2){
-    listNode<int> *pHead = new listNode<int>(0);
-    listNode<int> *p1 = l1,*p2 = l2, *p3=pHead;
+ListNode<int> *Solution::addTwoNumbers(ListNode<int>* l1, ListNode<int>*l2){
+    ListNode<int> *pHead = new ListNode<int>(0);
+    ListNode<int> *p1 = l1,*p2 = l2, *p3=pHead;
     int sum = 0,temp = 0;
     while (p1!=nullptr||p2!=nullptr) {
-        int x = (p1!=nullptr)?p1->m_value:0;
-        int y = (p2!=nullptr)?p2->m_value:0;
+        int x = (p1!=nullptr)?p1->val:0;
+        int y = (p2!=nullptr)?p2->val:0;
         sum = x+ y+temp;
         temp = sum/10;
-        p3->m_next = new listNode<int>(sum%10);
-        p3 = p3->m_next;
-        if (p1!=nullptr) p1 = p1->m_next;
-        if (p2!=nullptr) p2 = p2->m_next;
+        p3->next = new ListNode<int>(sum%10);
+        p3 = p3->next;
+        if (p1!=nullptr) p1 = p1->next;
+        if (p2!=nullptr) p2 = p2->next;
     }
     if (temp == 1) {
-        p3->m_next = new listNode<int>(1);
+        p3->next = new ListNode<int>(1);
     }
-    return pHead->m_next;
+    return pHead->next;
 }
-listNode<int> *Solution::rotateRight(listNode<int> *head, int k){
+ListNode<int> *Solution::rotateRight(ListNode<int> *head, int k){
     if(head==nullptr||k == 0)return head;
     int count = 1;
-    listNode<int> *p = head;
-    while (p->m_next!=nullptr) {
-        p = p->m_next;
+    ListNode<int> *p = head;
+    while (p->next!=nullptr) {
+        p = p->next;
         count++;
     }
     int rot = k%count;
     if(rot == 0) return head;
     int m = count-rot;
-    listNode<int> *q = head;
+    ListNode<int> *q = head;
     while (m>1) {
-        q = q->m_next;
+        q = q->next;
         m--;
     }
-    listNode<int> *x = q->m_next;
-    listNode<int> *y = q->m_next;
-    q->m_next = nullptr;
-    while (x!=nullptr && x->m_next != nullptr) {
-        x = x->m_next;
+    ListNode<int> *x = q->next;
+    ListNode<int> *y = q->next;
+    q->next = nullptr;
+    while (x!=nullptr && x->next != nullptr) {
+        x = x->next;
     }
-    x->m_next = head;
+    x->next = head;
     return y;
 }
-//listNode<int>* Solution::flatten(listNode<int>* head){
+//ListNode<int>* Solution::flatten(ListNode<int>* head){
 //    if (!head) return head;
-//    listNode<int>*p = head;
-//    stack<listNode<int>*> s;
+//    ListNode<int>*p = head;
+//    stack<ListNode<int>*> s;
 //    while (p) {
 //        if (p->child) {
 //            s.push(p->next);
@@ -106,27 +106,27 @@ listNode<int> *Solution::rotateRight(listNode<int> *head, int k){
 vector<int> Solution::inorder(biTreeNode<int>* root){
     vector<int> m;
     if (root) {
-        inorder(root->m_left);
-        m.push_back(root->m_value);
-        inorder(root->m_right);
+        inorder(root->left);
+        m.push_back(root->val);
+        inorder(root->right);
     }
     return m;
 }
 vector<int> Solution::preorder(biTreeNode<int>* root){
     vector<int> m;
     if (root) {
-        m.push_back(root->m_value);
-        preorder(root->m_left);
-        preorder(root->m_right);
+        m.push_back(root->val);
+        preorder(root->left);
+        preorder(root->right);
     }
     return m;
 }
 vector<int> Solution::posorder(biTreeNode<int>* root){
     vector<int> m;
     if (root) {
-        posorder(root->m_left);
-        posorder(root->m_right);
-        m.push_back(root->m_value);
+        posorder(root->left);
+        posorder(root->right);
+        m.push_back(root->val);
     }
     return m;
 }
@@ -135,8 +135,8 @@ int Solution::maxDepth(biTreeNode<int>* root){
     int res = 0;
     if (root) {
         res++;
-        int max_left = maxDepth(root->m_left);
-        int max_right = maxDepth(root->m_right);
+        int max_left = maxDepth(root->left);
+        int max_right = maxDepth(root->right);
         res += max_left>max_right?max_left:max_right;
     }
     return res;
@@ -146,7 +146,7 @@ int Solution::maxDepth(biTreeNode<int>* root){
 //}
 //bool Solution::isvalid(biTreeNode<int>* root,int min,long int max){
 //    if (!root) return true;
-//    return (root->val>min)&&root->val<max&&isvalid(root->m_left, min, root->val)&&isvalid(root->m_right, root->val,max);
+//    return (root->val>min)&&root->val<max&&isvalid(root->left, min, root->val)&&isvalid(root->right, root->val,max);
 //}
 int Solution::numIslands(vector<vector<char>>& grid){
     int count = 0,rows = grid.size(), cols = rows>0?grid[0].size():0;
@@ -184,15 +184,15 @@ int Solution::numIslands(vector<vector<char>>& grid){
     return count;
 }
 //int Solution::firstBadVersion(int n){
-//    int m_left = 1, m_right = n;
-//    while (m_left<m_right) {
-//        int mid = m_left+(m_right-m_left)/2;
+//    int left = 1, right = n;
+//    while (left<right) {
+//        int mid = left+(right-left)/2;
 //        if (isBadVersion(mid)) {
-//            m_right = mid;
+//            right = mid;
 //        }
-//        else m_left = mid+1;
+//        else left = mid+1;
 //    }
-//    return m_left;
+//    return left;
 //}
 int Solution::rob(vector<int>& nums){
     int n = nums.size();
@@ -249,12 +249,12 @@ void Solution::turnString(vector<string>& m,int n){
 }
 bool Solution::isSymmetric(biTreeNode<int>* root){
     if(!root)return true;
-    return symmetric(root->m_left,root->m_right);
+    return symmetric(root->left,root->right);
 }
 bool Solution::symmetric(biTreeNode<int>* p,biTreeNode<int>* q){
     if(!p&&!q) return true;
     if(!p||!q) return false;
-    return (p->m_value==q->m_value)&&symmetric(p->m_left, q->m_right)&&symmetric(p->m_right,q->m_left);
+    return (p->val==q->val)&&symmetric(p->left, q->right)&&symmetric(p->right,q->left);
 }
 vector<vector<int>> Solution::levelOrder(biTreeNode<int>* root){
     queue<biTreeNode<int>*> temp;
@@ -269,15 +269,15 @@ vector<vector<int>> Solution::levelOrder(biTreeNode<int>* root){
         biTreeNode<int>* q = temp.front();
         temp.pop();
         if(p){
-            res[n].push_back(p->m_value);
-            temp.push(p->m_left);
-            temp.push(p->m_right);
+            res[n].push_back(p->val);
+            temp.push(p->left);
+            temp.push(p->right);
         }
         if(q)
         {
-            res[n].push_back(p->m_value);
-            temp.push(q->m_left);
-            temp.push(q->m_right);
+            res[n].push_back(p->val);
+            temp.push(q->left);
+            temp.push(q->right);
         }
         n++;
     }
@@ -313,7 +313,7 @@ int Solution::evalRPN(vector<string>& tokens){
 //}
 //bool Solution::isvalid(biTreeNode<int>* root,int min,long int max){
 //    if (!root) return true;
-//    return (root->val>min)&&root->val<max&&isvalid(root->m_left, min, root->val)&&isvalid(root->m_right, root->val,max);
+//    return (root->val>min)&&root->val<max&&isvalid(root->left, min, root->val)&&isvalid(root->right, root->val,max);
 //}
 
 vector<string> Solution::fizzBuzz(int n){
@@ -499,18 +499,18 @@ vector<biTreeNode<int>*> *Solution::generateTreesDFS(int start,int end){
             for(int j = 0;j<left_trees->size();j++){
                 for (int k = 0; k<right_trees->size(); k++) {
                     biTreeNode<int> *current_tree = new biTreeNode<int>(i);
-                    current_tree->m_left = (*left_trees)[j];
-                    current_tree->m_right = (*right_trees)[k];
+                    current_tree->left = (*left_trees)[j];
+                    current_tree->right = (*right_trees)[k];
                     trees->push_back(current_tree);
                 }}}
         return trees;
 }
 
-listNode<int> *Solution::swapPairs(listNode<int> *head) {
-if(head==nullptr||head->m_next==nullptr) return head;
-    listNode<int> *temp = head->m_next;
-    head->m_next = swapPairs(temp->m_next);
-    temp->m_next = head;
+ListNode<int> *Solution::swapPairs(ListNode<int> *head) {
+if(head==nullptr||head->next==nullptr) return head;
+    ListNode<int> *temp = head->next;
+    head->next = swapPairs(temp->next);
+    temp->next = head;
     return temp;
 }
 
@@ -971,12 +971,12 @@ string Solution::commonPrefix(const string &a, const string &b) {
     return res;
 }
 
-void Solution::printRverseList(listNode<int> *head) {
+void Solution::printRverseList(ListNode<int> *head) {
     stack<int> temp;
     while(head!= nullptr)
     {
-        temp.push(head->m_value);
-        head = head->m_next;
+        temp.push(head->val);
+        head = head->next;
     }
     while (temp.size()!=0){
         std::cout<<temp.top()<<std::endl;
@@ -1006,8 +1006,8 @@ biTreeNode<int> *Solution::rebuildBiTree(vector<int> pre, vector<int> mid) {
     vector<int> mid_right(mid.begin()+mid_left.size()+1,mid.end());
     vector<int> pre_left(pre.begin()+1,pre.begin()+mid_left.size()+1);
     vector<int> pre_right(pre.begin()+1+mid_left.size()+1,pre.end());
-    head->m_left = rebuildBiTree(pre_left,mid_left);
-    head->m_right = rebuildBiTree(pre_right,mid_right);
+    head->left = rebuildBiTree(pre_left,mid_left);
+    head->right = rebuildBiTree(pre_right,mid_right);
 }
 
 Solution::sTreeNode *Solution::preNextNode(Solution::sTreeNode *p) {
@@ -1088,68 +1088,68 @@ if (i == nums.size())
     }
 }
 
-listNode<int> *Solution::sortList(listNode<int> *head) {
-    if(!head||!head->m_next)
+ListNode<int> *Solution::sortList(ListNode<int> *head) {
+    if(!head||!head->next)
         return head;
 //    bool temp = true;
 //    while(temp) {
 //        temp = false;
-//        listNode<int> *work = head;
+//        ListNode<int> *work = head;
 //
-//        while (work->m_next && work) {
-//            while (work->m_value > work->m_next->m_value) {
-//                 work->m_value = work->m_value + work->m_next->m_value;
-//                 work->m_next->m_value = work->m_value - work->m_next->m_value;
-//                 work->m_value = work->m_value - work->m_next->m_value;
+//        while (work->next && work) {
+//            while (work->val > work->next->val) {
+//                 work->val = work->val + work->next->val;
+//                 work->next->val = work->val - work->next->val;
+//                 work->val = work->val - work->next->val;
 //                 temp = true;
 //            }
-//            work = work->m_next;
+//            work = work->next;
 //        }
 //    }
-    listNode<int> *p = head;
-    listNode<int> *k = nullptr;
-    listNode<int> *q = getMid(head);
-    k = q->m_next;
-    q->m_next = nullptr;
+    ListNode<int> *p = head;
+    ListNode<int> *k = nullptr;
+    ListNode<int> *q = getMid(head);
+    k = q->next;
+    q->next = nullptr;
     p = sortList(p);
     k = sortList(k);
     return merge(p,k);
 }
-listNode<int> *Solution::getMid(listNode<int> *head) {
-    listNode<int> *fast= head->m_next;
-    listNode<int> *slow= head;
-    while(fast != nullptr && fast->m_next!= nullptr){
-        fast = fast->m_next->m_next;
-        slow = slow->m_next;
+ListNode<int> *Solution::getMid(ListNode<int> *head) {
+    ListNode<int> *fast= head->next;
+    ListNode<int> *slow= head;
+    while(fast != nullptr && fast->next!= nullptr){
+        fast = fast->next->next;
+        slow = slow->next;
     }
     return slow;
 }
 
 
-listNode<int> *Solution::merge(listNode<int> *p, listNode<int> *q) {
+ListNode<int> *Solution::merge(ListNode<int> *p, ListNode<int> *q) {
     if (p == nullptr) {
         return q;
     }
     if (q == nullptr) {
         return p;
     }
-    listNode<int>* head = new listNode<int>(0);
-    listNode<int> *work = head;
+    ListNode<int>* head = new ListNode<int>(0);
+    ListNode<int> *work = head;
     while (p != nullptr && q != nullptr) {
-        if (p->m_value >= q->m_value) {
-            work->m_next = q;
-            q = q->m_next;
+        if (p->val >= q->val) {
+            work->next = q;
+            q = q->next;
         } else {
-            work->m_next = p;
-            p = p->m_next;
+            work->next = p;
+            p = p->next;
         }
-        work = work->m_next;
+        work = work->next;
     }
     if (p != nullptr)
-        work->m_next = p;
+        work->next = p;
     if( q != nullptr)
-        work->m_next = q;
-    return head->m_next;
+        work->next = q;
+    return head->next;
 }
 bool Solution::isPalindrome(int x) {
     if(x<0)

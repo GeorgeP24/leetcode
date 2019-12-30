@@ -11,14 +11,14 @@
 
 #include <cstdio>
 #include <vector>
-#include "../datastruct/datasturct.hpp"
-using namespace _datasturct;
+#include "../datastruct/datastruct.hpp"
+using namespace datastruct;
 using std::vector;
 class Solution{
 public:
-    listNode<int>* addTwoNumbers(listNode<int>* l1, listNode<int>* l2);
-    listNode<int>* rotateRight(listNode<int>* head, int k);
-    listNode<int>* flatten(listNode<int>* head);
+    ListNode<int>* addTwoNumbers(ListNode<int>* l1, ListNode<int>* l2);
+    ListNode<int>* rotateRight(ListNode<int>* head, int k);
+    ListNode<int>* flatten(ListNode<int>* head);
     vector<int> inorder(biTreeNode<int>* root);
     vector<int> preorder(biTreeNode<int>* root);
     vector<int> posorder(biTreeNode<int>* root);
@@ -53,7 +53,7 @@ public:
 //    不同的二叉搜索树个数2
     vector<biTreeNode<int>*> generateTrees(int n);
     vector<biTreeNode<int>*> *generateTreesDFS(int start,int end);
-    listNode<int>* swapPairs(listNode<int>* head);
+    ListNode<int>* swapPairs(ListNode<int>* head);
     //寻找数组的中心索引
     int pivotIndex(vector<int>& nums);
     //数组中重复数字 size = n, -1<nums[i]<n
@@ -91,7 +91,7 @@ public:
     //第二版本
     string reverseWords2_2(string s);
 //    从头到尾打印单链表
-    void printRverseList(listNode<int>*head);
+    void printRverseList(ListNode<int>*head);
 //    根据前序遍历和中序遍历，重建二叉树
     biTreeNode<int>* rebuildBiTree(vector<int>pre,vector<int>mid);
 //    input：二叉树，一个节点。
@@ -120,9 +120,9 @@ public:
     vector<vector<int>> permute(vector<int>& nums);
     void _permute(vector<int>& nums,vector<vector<int>>& res,int i);
 //    归并排序
-    listNode<int>* sortList(listNode<int>* head);
-    listNode<int>* getMid(listNode<int>* head);
-    listNode<int>* merge(listNode<int>* p,listNode<int>* q);
+    ListNode<int>* sortList(ListNode<int>* head);
+    ListNode<int>* getMid(ListNode<int>* head);
+    ListNode<int>* merge(ListNode<int>* p,ListNode<int>* q);
     //回文数
     bool isPalindrome(int x);
     //众数 个数大于等于n/2
